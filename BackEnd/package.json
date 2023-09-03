@@ -12,7 +12,6 @@
   "dependencies": {
     "@types/node": "^20.5.7",
     "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-wallet": "^1.0.2",

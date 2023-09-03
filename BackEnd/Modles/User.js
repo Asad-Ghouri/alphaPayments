@@ -44,8 +44,17 @@ const userSchema = new mongoose.Schema({
       address:{
         type: String,
       },
+      createdat:{
+        type:String
+      },
+      status:{
+        type:String,
+        default:"Pending"
+      }
     },
   ],
+},{
+  timestamps: true, // Add createdAt and updatedAt for the main User model
 });
 
 const User = mongoose.model("User", userSchema);

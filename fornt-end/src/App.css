@@ -53,3 +53,299 @@
     margin-left: 1.3rem;
     font-size: 35px;
   }
+
+  .cb{
+    color: black;
+  }
+
+
+  /* PaymentTable.css */
+.payment-table {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* th {
+  background-color: #f2f2f2;
+} */
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+.pl , .btn{
+  padding-left: 2rem;
+}
+
+/* PaymentButton.css */
+.payment-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.payment-button:hover {
+  background-color: #0056b3; /* Button background color on hover */
+}
+
+
+/* PaymentForm.css */
+.payment-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.payment-form.open {
+  display: flex;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Add this CSS to your existing stylesheet or create a new CSS file */
+.popup-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+ 
+  width: 22%;
+
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.popup-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.popup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.popup-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Add this CSS to your existing stylesheet or create a new CSS file */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+/* PaymentPage.css */
+.payment-page {
+  /* display: flex; */
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f2f2f2;
+  width: 62%;
+  margin-left: 10%;
+}
+
+.payment-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.payment-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.payment-amount {
+  font-size: 20px;
+  margin-bottom: 20px;
+  display: flex;
+    justify-content: space-between;
+}
+
+.payment-amount-value {
+  font-weight: bold;
+}
+
+.payment-currency {
+  color: #888;
+}
+
+.payment-address {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.payment-address-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.qr-scan-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.payment-status {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.status-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.status-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.status-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.waiting {
+  background-color: #f3a200;
+}
+
+.expired {
+  background-color: #d63031;
+}
+
+.confirmed {
+  background-color: #55efc4;
+}
+
+.sending {
+  background-color: #0984e3;
+}
+
+.sent {
+  background-color: #00b894;
+}
+
+.status-text {
+  font-size: 18px;
+  color: #333;
+}

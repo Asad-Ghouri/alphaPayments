@@ -6,19 +6,22 @@ import { NavLink , useNavigate } from "react-router-dom";
 
 import "../../App.css"
 
-// import { toast } from 'react-toastify'; // Import toast from react-toastify
-// import 'react-toastify/dist/ReactToastify.css';
+//import { toast } from 'react-toastify'; // Import toast from react-toastify
+//import 'react-toastify/dist/ReactToastify.css';
 function GetApikey() {
 
     const [apiKey, setApiKey] = useState('');
     const userId = useSelector(state=>state.UserId)
-    const isAuth = useSelector(state=>state.isAuth)
+    // const isAuth = useSelector(state=>state.isAuth)
     const navigate = useNavigate();
     const [Infetchkey, setInfetchkey] = useState('');
-  
+    const [paymentCount, setpaymentCount] = useState();
+    const authToken = localStorage.getItem('token');
+    // const authToken = localStorage.getItem('token');
+           
   const generateApiKey = async () => {
     
-   const data = await fetch(`/generateApiKey/${userId}`, {
+   const data = await fetch(`/generateApiKey/${authToken}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,26 +33,33 @@ function GetApikey() {
   const handleCopyKey = (key) => {
     navigator.clipboard.writeText(key); // Copy key to clipboard
 
-    // toast.success('API key copied to clipboard'); // Show toast notification
+    //toast.success('API key copied to clipboard'); // Show toast notification
   };
 
   useEffect(() => {
-    if(!isAuth)
+    if(!authToken)
     {
         navigate("/");
     }
 }, []);
 
+     
+   function paymentNavigation(){
+    navigate("/PaymentLinkGenerator");
+   }
+
   useEffect(() => {
     async function fetchData() {
         try {
-          const response = await fetch(`getUserdata/${userId}`); // Replace with your API URL
+          const response = await fetch(`getUserdata/${authToken}`); // Replace with your API URL
           if (!response.ok) {
             throw new Error("Request failed");
           }
           const data = await response.json();
           console.log("in useEffect data is ",data.apiKeys); // Process the fetched data
           setApiKey(data.apiKeys)
+          const totalPaymentLinks = data.paymentLinks.length;
+          setpaymentCount(totalPaymentLinks)
         } catch (error) {
           console.error("Error:", error);
         }
@@ -89,7 +99,8 @@ function GetApikey() {
                             </div>
                         </div>
                     </div>
-                    <div class="ag-courses_item">
+         
+                    <div class="ag-courses_item" onClick={paymentNavigation}>
                         <div class="ag-courses-item_link">
                             <div class="ag-courses-item_bg"></div>
 
@@ -99,7 +110,7 @@ function GetApikey() {
 
                             <div class="ag-courses-item_date-box">
                                 <h2 class="ag-courses-item_date">
-                                    0
+                                    {paymentCount?paymentCount:0}
                                 </h2>
                             </div>
                         </div>

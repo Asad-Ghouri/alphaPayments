@@ -36,14 +36,14 @@ const Login = ({getid}) => {
   const Userlogin = async (e) => {
 
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/login', {
+    const res = await fetch('/login', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         email, password
-      }) 
+      })
 
     });
     const data = await res.json();
@@ -57,7 +57,7 @@ const Login = ({getid}) => {
         type:"LOGIN",
         UserId : idd
       })
-      navigate("/PaymentLinkGenerator");
+      navigate("/GetApikey");
 
     }
   }
