@@ -1,0 +1,55 @@
+/* *{
+    display: flex;
+    height:100vh;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f5f7;
+} */
+
+/* Example CSS for styling the API key list */
+.api-key-list {
+    list-style-type: none;
+    padding: 0;
+    
+  }
+  
+  .api-key-item {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Adjust styles as needed */
+  .keyflex{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    margin-top: 2rem;
+  }
+
+  .keyflex .text{
+    color: #3ecd5e;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .keyflex .btn button{
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #3ecd5e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .yourapitext{
+    margin-left: 1.3rem;
+    font-size: 35px;
+  }
