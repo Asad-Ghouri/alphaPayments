@@ -110,6 +110,37 @@ Routers.get(`/PaymentLinkGenerator/gett/:id/:amd`, async (request, response) => 
       .json({ msg: "error while reading a single user" });
   }
 });
+
+Routers.get('/changedetails/gett/:id/:amd', async (request, response) => {
+  try {
+    const userId = request.params.id;
+    const uniqueId = request.params.amd;
+
+    // Find the user and the matching payment link
+    const user = await User.findOneAndUpdate(
+      {
+        _id: userId, // Match the ObjectId
+        "paymentLinks.uniqueid": uniqueId, // Match the paymentLink with the specified uniqueid
+      },
+      {
+        $set: {
+          "paymentLinks.$.status": "done", // Update the status of the matching paymentLink to "done"
+        },
+      },
+      { new: true } // Return the updated user document
+    );
+
+    if (!user) {
+      return response.status(404).json({ msg: "User or payment link not found" });
+    }
+
+    console.log(user);
+    response.status(200).json({msg:"Its-Done"});
+  } catch (err) {
+    console.error(err);
+    return response.status(500).json({ msg: "Error while updating payment link status" });
+  }
+});
 // const { QRCode } = qrcode;
 
 const app = express();

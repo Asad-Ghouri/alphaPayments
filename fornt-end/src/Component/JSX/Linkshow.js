@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import QRCode from "qrcode.react";
-import { useParams } from "react-router-dom";
+import { NavLink , useNavigate,useParams } from "react-router-dom";
+import axios from "axios"
 const Linkshow = () => {
+  const navigate= useNavigate();
   const userId = useSelector((state) => state.UserId);
   const [data, setdata] = useState([]);
   const authToken = localStorage.getItem('token');
@@ -12,7 +14,7 @@ const Linkshow = () => {
 
   const {id,amd}=useParams();
   console.log("id==="+id)
-
+  const [responseData, setResponseData] = useState(null);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -34,7 +36,16 @@ const Linkshow = () => {
 
     fetchData();
   }, [userId]);
-
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.get(`/changedetails/gett/${id}/${amd}`); // Replace with your API endpoint
+      if(response.data){
+        navigate("/PaymentLinkGenerator")
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   return (
     // <div>
     //   <h1 style={{ textAlign: "center" }}>Payment Links</h1>
@@ -77,6 +88,20 @@ const Linkshow = () => {
         </div>
         <p className="payment-address">Send the funds to this address</p>
         <p className="payment-address-value">{payment.address}</p>
+        <div>
+        {payment.status === "Pending" ? (
+  <div>
+    <h1>React Axios GET Request Example</h1>
+    <button onClick={handleButtonClick}>Approve Transaction</button>
+  </div>
+) : (
+  <div>
+    <p>Already Approved</p>
+  </div>
+)}
+
+    </div>
+       
         <div>
                <QRCode value={payment.address} />
             </div>
