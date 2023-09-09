@@ -7,7 +7,7 @@ require('./DB/connection');
 const port = 5000;
 
 app.use(express.json());
-app.use(require('./Router/auth'));
+app.use(require('./Router/auth.js'));
 
 
 

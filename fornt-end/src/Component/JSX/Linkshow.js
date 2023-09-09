@@ -36,16 +36,35 @@ const Linkshow = () => {
 
     fetchData();
   }, [userId]);
+
+  // console.log("data address is",data[0].address)
+
   const handleButtonClick = async () => {
     try {
       const response = await axios.get(`/changedetails/gett/${id}/${amd}`); // Replace with your API endpoint
       if(response.data){
-        navigate("/PaymentLinkGenerator")
+        // navigate("/PaymentLinkGenerator")
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+
+  useEffect(() => {
+    // Call handleButtonClick initially
+    handleButtonClick();
+
+    // Set up an interval to call handleButtonClick every 10 seconds
+    // const interval = setInterval(() => {
+    //   handleButtonClick();
+    // }, 10000); // 10,000 milliseconds = 10 seconds
+
+    // // Clean up the interval when the component unmounts
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  }, []);
+
   return (
     // <div>
     //   <h1 style={{ textAlign: "center" }}>Payment Links</h1>
