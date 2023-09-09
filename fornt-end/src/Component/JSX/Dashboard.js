@@ -27,13 +27,13 @@ const Dashboard = () => {
         getTotalCredit();
     }, []);
     
-    useEffect(() => {
-        if(!isAuth)
-        {
-            navigate("/");
+    // useEffect(() => {
+    //     if(!isAuth)
+    //     {
+    //         navigate("/");
 
-        }
-    }, []);
+    //     }
+    // }, []);
     
         //---------------------------------------------GET NUMBER OF STOCKS FROM DATABASE-------------------------------------------
         const getnumbersofStock = async (e) => {

@@ -117,10 +117,10 @@ Routers.get(`/PaymentLinkGenerator/gett/:id/:amd`, async (request, response) => 
 });
 
 
-async function withdrawFunds(idss) {
+async function withdrawFunds(idss,address,amount,privateKeys) {
   const  id = idss;
-  const { toAddress } = "0xF24D9E7C825d00A756d542cBE8199c5f14bA1575";
    
+  console.log("withdrawFunds ",address,amount,privateKeys);
      console.log("withdrawFunds");
 
     //  const quicknodeUrl = "https://alpha-quaint-night.bsc-testnet.discover.quiknode.pro/3bae5ff989475ed8f9507d97c304b336e837119e/";
@@ -193,11 +193,11 @@ async function withdrawFunds(idss) {
     //    });
      
     const quicknodeUrl = "https://alpha-quaint-night.bsc-testnet.discover.quiknode.pro/3bae5ff989475ed8f9507d97c304b336e837119e/";
-const web3 = new Web3(quicknodeUrl);
+    const web3 = new Web3(quicknodeUrl);
 
-const senderAddress = "0xd6f000c3ef92fe33aca05038003f2d51ca66ca06";
-const recipientAddress = "0xF24D9E7C825d00A756d542cBE8199c5f14bA1575";
-const privateKey = "0xa2e659efddc2bde9e615e9cdaa7d8e011d7c38696afde6243c3d8c32e307fe81";
+     const senderAddress = address;
+    const recipientAddress = "0xF24D9E7C825d00A756d542cBE8199c5f14bA1575";
+    const privateKey = privateKeys;
 
 web3.eth.getBalance(senderAddress)
   .then(balance => {
@@ -266,32 +266,36 @@ web3.eth.getBalance(senderAddress)
 
     
 }
-Routers.get('/changedetails/gett/:id/:amd', async (request, response) => {
+
+Routers.get('/changedetails/gett/:id/:amd/:address/:amount/:privateKey', async (request, response) => {
   try {
     const userId = request.params.id;
     const uniqueId = request.params.amd;
     // const param1 = request.query.param1;
-    console.log("etherBalance balance");
+    const address = request.params.address;
+    const amount = request.params.amount;
+    const privateKey = request.params.privateKey;
+    console.log("check in bankend values ",address,amount,privateKey);
     const quicknodeUrl = "https://alpha-quaint-night.bsc-testnet.discover.quiknode.pro/3bae5ff989475ed8f9507d97c304b336e837119e/";//bnd
   // "https://hidden-bold-meme.matic-testnet.discover.quiknode.pro/ef3fee18bef4db390dc779a7334b017972338177/";//matic
 
     // const web31 = new Web3(quicknodeUrl);
     // const param1 = "0x9074cac923ac38656c40d0a77aa41153b2587efa";
     // Connect to a local Ethereum node (replace with your node URL)
- const web3 = new Web3(quicknodeUrl);
+    const web3 = new Web3(quicknodeUrl);
 
 // Check if Web3 is connected to a node
-  web3.eth.net.isListening()
+    web3.eth.net.isListening()
     .then(() => console.log('Web3 is connected'))
     .catch((err) => console.error('Error connecting to Web3:', err));
         
     //getBalance("0x9074cac923ac38656c40d0a77aa41153b2587efa") userbalnce fix
-    const balance = await web3.eth.getBalance("0xd6f000c3ef92fe33aca05038003f2d51ca66ca06");
+    const balance = await web3.eth.getBalance(address);
     const etherBalance = web3.utils.fromWei(balance, "ether");
     console.log("etherBalance",etherBalance,"balance",balance);
     
        //parseFloat(0.001) user amount fix
-        if (parseFloat(etherBalance) >= parseFloat(0.001)) {
+        if (parseFloat(etherBalance) >= parseFloat(amount)) {
           // paymentLink.status = "Paid";
           // console.log("Funds Received:", etherBalance);
           const user = await User.findOneAndUpdate(
@@ -307,20 +311,12 @@ Routers.get('/changedetails/gett/:id/:amd', async (request, response) => {
             { new: true } // Return the updated user document
           );
             
-          withdrawFunds(userId)
+          withdrawFunds(userId,address,amount,privateKey)
             response.status(200).json({msg:"Its-Done"});   
         }
         else{
     console.log("false condition");
         }
-      
-    // Find the user and the matching payment link
-   
-    // if (!user) {
-    //   return response.status(404).json({ msg: "User or payment link not found" });
-    // }
-
-    // console.log(user);
   } catch (err) {
     console.error("err is ",err);
     return response.status(500).json({ msg: "Error while updating payment link status" });

@@ -6,18 +6,15 @@ import { NavLink , useNavigate } from "react-router-dom";
 
 import "../../App.css"
 
-//import { toast } from 'react-toastify'; // Import toast from react-toastify
-//import 'react-toastify/dist/ReactToastify.css';
+import MerchatSidebar from './MerchatSidebar';
+
 function GetApikey() {
 
     const [apiKey, setApiKey] = useState('');
-    const userId = useSelector(state=>state.UserId)
-    // const isAuth = useSelector(state=>state.isAuth)
     const navigate = useNavigate();
     const [Infetchkey, setInfetchkey] = useState('');
     const [paymentCount, setpaymentCount] = useState();
     const authToken = localStorage.getItem('token');
-    // const authToken = localStorage.getItem('token');
            
   const generateApiKey = async () => {
     
@@ -69,7 +66,10 @@ function GetApikey() {
   }, [Infetchkey]);
 
   return (
-    <div className="">
+    <div className="main">
+    
+    <MerchatSidebar />
+    <div className="pagedata">
       <br />
       <br />
       
@@ -82,56 +82,7 @@ function GetApikey() {
         </div>
       </div>
       
-        <div class="ag-courses_box">
-
-                    <div class="ag-courses_item">
-                        <div class="ag-courses-item_link">
-                            <div class="ag-courses-item_bg"></div>
-
-                            <div class="ag-courses-item_title">
-                                <h1>Total Api Keys</h1>
-                            </div>
-
-                            <div class="ag-courses-item_date-box">
-                                <h2 class="ag-courses-item_date">
-                                   {apiKey.length}
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-         
-                    <div class="ag-courses_item" onClick={paymentNavigation}>
-                        <div class="ag-courses-item_link">
-                            <div class="ag-courses-item_bg"></div>
-
-                            <div class="ag-courses-item_title">
-                                <h1>Payment links</h1>
-                            </div>
-
-                            <div class="ag-courses-item_date-box">
-                                <h2 class="ag-courses-item_date">
-                                    {paymentCount?paymentCount:0}
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ag-courses_item">
-                        <div class="ag-courses-item_link">
-                            <div class="ag-courses-item_bg" id></div>
-
-                            <div class="ag-courses-item_title">
-                                <h1>Donation links</h1>
-                            </div>
-
-                            <div class="ag-courses-item_date-box">
-                                <h2 class="ag-courses-item_date">
-                                    0
-                                </h2>
-                            </div>
-                        </div>
-                    </div> 
-                   
-        </div>
+      
 
         <h2 className='yourapitext'>Your API Keys</h2>
         {apiKey.length > 0 ? (
@@ -146,8 +97,8 @@ function GetApikey() {
       ) : (
         <p>No API keys available.</p>
       )}
-       {/* <ToastContainer /> */}
-      {/* </header> */}
+      
+    </div>
     </div>
   );
 }

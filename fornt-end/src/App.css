@@ -7,6 +7,10 @@
 } */
 
 /* Example CSS for styling the API key list */
+body {
+  font-family: 'Syne', sans-serif!important;
+}
+
 .api-key-list {
     list-style-type: none;
     padding: 0;

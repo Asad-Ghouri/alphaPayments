@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import MerchatSidebar from './MerchatSidebar';
+
 function PaymentLinkGenerator() {
   const navigate=useNavigate();
   const [amount, setamount] = useState();
@@ -78,12 +80,15 @@ function PaymentLinkGenerator() {
   };
   
   return (
-    <>
-    <div>
+    <div className="main">
+    <MerchatSidebar />
+    <div className="f-page">
+      <div className="f-page">
       <h1 className="pl"> Payment Link</h1>
      <div className="btn">
       <button className="payment-button" onClick={isFormtrue}>Create Payment Link</button>
      </div>
+      </div>
      {isFormOpen && (
   <div className="popup-form">
     <button className="close-button" onClick={closePopup}>
@@ -124,24 +129,8 @@ function PaymentLinkGenerator() {
   </div>
 )}
      
-      {/* {
-      paymentLinks? 
-      <>
-     { paymentLinks.map((walletAddress, index) => (
-        <div key={index}>
-          <p>Wallet Address: http://localhost:3000/PaymentLinkGenerator/gett/{authToken}/{walletAddress}</p>
-        </div>
-      ))
-     }
-      </>
-     :
-     <div className="cb">No link found</div>  
-    } */}
-
-      {/* <Link to="/PaymentLinkGenerator/gett/:id">Link Text</Link> */}
-
       <div id="qrcode" />
-    </div>
+   
     
     <div className="payment-table">
       <table>
@@ -170,7 +159,10 @@ function PaymentLinkGenerator() {
           }
       </table>
     </div>
-    </>
+    
+    </div>
+
+    </div>
   );
 }
 

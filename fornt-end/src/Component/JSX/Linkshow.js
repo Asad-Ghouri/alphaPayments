@@ -7,6 +7,11 @@ const Linkshow = () => {
   const navigate= useNavigate();
   const userId = useSelector((state) => state.UserId);
   const [data, setdata] = useState([]);
+
+  const [amount, setamount] = useState([]);
+  const [address, setaddress] = useState([]);
+  const [privateKey, setprivateKey] = useState([]);
+  console.log("send data ",address,amount,privateKey)
   const authToken = localStorage.getItem('token');
   console.log(authToken)
   // State to store QR code data for each payment
@@ -15,6 +20,7 @@ const Linkshow = () => {
   const {id,amd}=useParams();
   console.log("id==="+id)
   const [responseData, setResponseData] = useState(null);
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -25,7 +31,9 @@ const Linkshow = () => {
         const data = await response.json();
         console.log(data);
         setdata(data.paymentLinks);
-
+        setaddress(data.paymentLinks[0].address)
+        setamount(data.paymentLinks[0].amount)
+        setprivateKey(data.paymentLinks[0].privateKey)
         // Generate QR codes for each payment
         const qrCodeData = data.paymentLinks.map((payment) => payment.qrCode);
         setQrCodes(qrCodeData);
@@ -41,9 +49,9 @@ const Linkshow = () => {
 
   const handleButtonClick = async () => {
     try {
-      const response = await axios.get(`/changedetails/gett/${id}/${amd}`); // Replace with your API endpoint
+      const response = await axios.get(`/changedetails/gett/${id}/${amd}/${address}/${amount}/${privateKey}`); // Replace with your API endpoint
       if(response.data){
-        // navigate("/PaymentLinkGenerator")
+        navigate("/PaymentLinkGenerator")
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -66,38 +74,10 @@ const Linkshow = () => {
   }, []);
 
   return (
-    // <div>
-    //   <h1 style={{ textAlign: "center" }}>Payment Links</h1>
-    //   <ul style={{ listStyle: "none", padding: 0 }}>
-    //     {data.map((payment, index) => (
-    //       <li
-    //         key={index}
-    //         style={{
-    //           border: "1px solid #ccc",
-    //           borderRadius: "5px",
-    //           padding: "10px",
-    //           marginBottom: "10px",
-    //         }}
-    //       >
-    //         <strong>Amount:</strong> {payment.amount}
-    //         <br />
-    //         <strong>Currency:</strong> {payment.currency}
-    //         <br />
-    //         <strong>Note:</strong> {payment.note}
-    //         <br />
-    //         <strong>createdAt:</strong> {payment.createdat}
-    //         <br />
-    //         <strong>Status:</strong> {payment.status}
-    //         <br />
-    //         <div>
-    //           <QRCode value={payment.address} />
-    //         </div>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
+  
     <>
     {data.map((payment, index) => (
+      
      <div className="payment-page">
       <div className="payment-details">
         <h1 className="payment-title">Payment Details</h1>

@@ -4,7 +4,7 @@ import { Icon } from 'react-icons-kit'
 import { eye } from 'react-icons-kit/feather/eye'
 import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import '../CSS/Login.css';
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { NavLink , useNavigate } from "react-router-dom";
 import { useSelector , useDispatch } from "react-redux"
 
@@ -16,8 +16,8 @@ const Login = ({getid}) => {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
   
-  const isAuth = useSelector(state=>state.state)
   const dispatch = useDispatch();
+  const authToken = localStorage.getItem('token');
 
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -62,7 +62,12 @@ const Login = ({getid}) => {
     }
   }
   
-
+  useEffect(() => {
+    if(authToken)
+    {
+        navigate("/MerchatDashboard");
+    }
+}, []);
   return (
     < div className='container'>
       <form className='Loginform' method='POST'>
