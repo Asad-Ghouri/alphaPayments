@@ -193,7 +193,6 @@ async function withdrawFunds(idss) {
     //    });
      
     const quicknodeUrl = "https://alpha-quaint-night.bsc-testnet.discover.quiknode.pro/3bae5ff989475ed8f9507d97c304b336e837119e/";
-const Web3 = require('web3');
 const web3 = new Web3(quicknodeUrl);
 
 const senderAddress = "0xd6f000c3ef92fe33aca05038003f2d51ca66ca06";
